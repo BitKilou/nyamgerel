@@ -12,11 +12,9 @@
     document.querySelectorAll('.lang-switch button').forEach(b => {
       b.classList.toggle('is-active', b.dataset.setLang === lang);
     });
-    try { localStorage.setItem('nyamgerel-lang', lang); } catch(e) {}
   };
-  const savedLang = (() => { try { return localStorage.getItem('nyamgerel-lang'); } catch(e) { return null; } })();
-  const initialLang = savedLang || (navigator.language && navigator.language.toLowerCase().startsWith('fr') ? 'fr' : 'en');
-  applyLang(initialLang);
+  // Always default to English on first load. Users switch via the EN / FR toggle.
+  applyLang('en');
   document.querySelectorAll('.lang-switch button').forEach(b => {
     b.addEventListener('click', () => applyLang(b.dataset.setLang));
   });
