@@ -118,7 +118,7 @@
 
   /* ============ Booking form ============ */
   const form = document.getElementById('bookingForm');
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
     const name = form.name.value.trim();
     const email = form.email.value.trim();
@@ -127,11 +127,47 @@
       return;
     }
     const lang = document.documentElement.dataset.lang || 'en';
-    const msg = (dict[lang] && dict[lang]['form.success']) || dict.en['form.success'];
-    const div = document.createElement('div');
-    div.className = 'form-success';
-    div.textContent = msg;
-    form.replaceWith(div);
-    // In a real deploy: POST to a Formspree/Resend endpoint.
+    const successMsg = (dict[lang] && dict[lang]['form.success']) || dict.en['form.success'];
+    const errorMsg = (dict[lang] && dict[lang]['form.error']) || dict.en['form.error'] || 'Something went wrong. Please email nyamgepel@gmail.com directly.';
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalLabel = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = (dict[lang] && dict[lang]['form.sending']) || dict.en['form.sending'] || 'Sending…';
+    try {
+      const data = new FormData(form);
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (res.ok) {
+        const div = document.createElement('div');
+        div.className = 'form-success';
+        div.textContent = successMsg;
+        form.replaceWith(div);
+      } else {
+        let detail = '';
+        try {
+          const j = await res.json();
+          if (j && j.errors && j.errors.length) detail = ' (' + j.errors.map(e => e.message).join(', ') + ')';
+        } catch (_) {}
+        showFormError(errorMsg + detail);
+      }
+    } catch (err) {
+      showFormError(errorMsg);
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalLabel;
+    }
+
+    function showFormError(message) {
+      let note = form.querySelector('.form-error');
+      if (!note) {
+        note = document.createElement('p');
+        note.className = 'form-error';
+        form.appendChild(note);
+      }
+      note.textContent = message;
+    }
   });
 })();

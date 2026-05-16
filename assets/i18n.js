@@ -56,6 +56,8 @@ window.I18N = {
     "form.submit": "Send booking request",
     "form.note": "Replies usually within 48 hours.",
     "form.success": "Thank you. Your request has been received — I will reply within 48 hours.",
+    "form.sending": "Sending…",
+    "form.error": "Something went wrong. Please email nyamgepel@gmail.com directly.",
 
     "contact.eyebrow": "Contact",
     "contact.title": "Let's create something together.",
@@ -120,6 +122,8 @@ window.I18N = {
     "form.submit": "Envoyer la demande",
     "form.note": "Réponse sous 48 heures en général.",
     "form.success": "Merci. Votre demande a bien été reçue — je vous répondrai sous 48 heures.",
+    "form.sending": "Envoi…",
+    "form.error": "Une erreur est survenue. Merci d'écrire directement à nyamgepel@gmail.com.",
 
     "contact.eyebrow": "Contact",
     "contact.title": "Créons quelque chose ensemble.",

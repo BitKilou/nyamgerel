@@ -142,7 +142,7 @@
         <li><strong data-i18n="booking.l4t">Editorial & photo</strong><span data-i18n="booking.l4s">Fashion shoots, art direction, campaigns.</span></li>
       </ul>
     </div>
-    <form class="booking-form" id="bookingForm" novalidate>
+    <form class="booking-form" id="bookingForm" action="https://formspree.io/f/xlgvrdpd" method="POST" novalidate>
       <div class="field">
         <label for="bf-name" data-i18n="form.name">Full name</label>
         <input id="bf-name" name="name" type="text" autocomplete="name" required />
@@ -175,6 +175,8 @@
         <label for="bf-msg" data-i18n="form.msg">Tell me about your project</label>
         <textarea id="bf-msg" name="message" rows="5"></textarea>
       </div>
+      <input type="hidden" name="_subject" value="New booking request — nyamgerel.com" />
+      <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px;top:-9999px;" aria-hidden="true" />
       <button type="submit" class="btn btn-primary" data-i18n="form.submit">Send booking request</button>
       <p class="form-note" data-i18n="form.note">Replies usually within 48 hours.</p>
     </form>

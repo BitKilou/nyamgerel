@@ -342,6 +342,16 @@ img { display: block; max-width: 100%; height: auto; }
   font-family: var(--font-display); font-size: var(--text-lg);
 }
 
+.form-error {
+  margin: 14px 0 0;
+  padding: 12px 14px;
+  border: 1px solid currentColor;
+  font-size: var(--text-xs);
+  letter-spacing: .04em;
+  color: #8a1d1d;
+  background: #fbeeee;
+}
+
 /* ----------- Contact ----------- */
 .contact { padding: clamp(80px, 12vw, 160px) 0; text-align: center; }
 .contact-inner { max-width: 720px; }
